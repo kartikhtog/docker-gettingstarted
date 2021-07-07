@@ -1,0 +1,55 @@
+"dockerfile" tells docker on how to build an image
+1) command to build image
+ - docker image build <src>
+ or docker build 
+2) push the docker image to registry
+ - docker image push <dockeruserid>/<repo>:<version>
+3) Image(class) is like stock container(object)
+4) A container is a running image
+5) delete image
+ - docker image rm <dockeruserid>/repo:version
+6) check docker images
+ - docker image ls -a
+ -a = list all .. when the stopped ones
+7) run container
+ - docker container run -d --name <name> -p 8080:8080 <url-of-container:default is dockerhub>
+ -d = run in background
+ -p = port mapping <host computer>:<container port>
+8) check containers
+ - docker container ls
+9) an app running in a container is called contrainerized app
+10) stop a docker container
+ - docker container stop <id> or <name>
+11) delete docker container
+ - docker container rm <name>
+12) Microservice - break apart the app into smaller items and can worked on and deployed seperately
+13) Declarative (docker-compose)
+ - Define everything you want in a config file and how it all connects
+ - give the file to docker and docker do the rest
+13) docker-compose up -d #looks for docker-compose.yml file name if you don't specify
+14) docker-swarm cluster of docker host into secure highly available cluster
+ - Managers + workers
+ - good practice to have odd number of managers
+ - docker service maps to Microservice
+ - docker swarm init --advertise-addr=localhost # initalized swarm and creates leader manager
+ # also return command to add workers to swarm .. so don't need to memorize that
+ - docker swarm join-token worker # return command to add workers
+ - docker swarm join-token manager # return command to add managers
+15) docker service # requires swarm -- will be automatically load balanced
+- docker service create --name <name> -p 8080:8080 --replicas 3 <image:dockerhubid/image:version>
+- docker service ls
+- docker service ps
+- docker service scale <name>=<number>
+- docker container rm <id1> <id2> ... -f # will delete those container but bring them back up to scale
+- docker service rm <name>
+- #do it using declarative yaml file
+16) stack on the swarm do not support building images on the fly
+  - docker build
+  - docker stack deploy -c docker-compose.yml <name>
+  - docker stack ls
+  - docker stack services counter
+  - docker stack ps counter
+  # re-run docker stack command after changing configuration(docker-compose.yml) instead changing them manually
+  - docker stack rm <name> # teardown
+  
+
