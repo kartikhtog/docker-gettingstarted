@@ -1,6 +1,6 @@
 "dockerfile" tells docker on how to build an image
 1) command to build image
- - docker image -t <name>:<tag> <src>
+ - docker image build -t <name>:<tag> <src>
  - tag is optional
 2) push the docker image to registry
  - docker image push <dockeruserid>/<repo>:<version>
